@@ -35,6 +35,7 @@ export class PhdriveNavigationService {
   }
 
   private httpFolderRequestParamBuilder(folderPath: string) {
+    if(folderPath === "") folderPath = "/";
     return folderPath ? {params: new HttpParams().append("path", folderPath)} : {};
   }
 }
