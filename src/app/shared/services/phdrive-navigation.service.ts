@@ -20,20 +20,21 @@ export class PhdriveNavigationService {
   constructor(private httpClient: HttpClient) { }
 
   createFolder(folderPath: string): Observable<FolderEntity> {
-    const options = folderPath ?
-          {params: new HttpParams().append("path", folderPath)} : {};
-    return this.httpClient.post<FolderEntity>(this.operations.post, options);
+    return this.httpClient.post<FolderEntity>(this.operations.post,
+           this.httpFolderRequestParamBuilder(folderPath));
   }
 
   getFolderContent(folderPath: string): Observable<FolderEntity> {
-    const options = folderPath ?
-          {params: new HttpParams().append("path", folderPath)} : {};
-    return this.httpClient.get<FolderEntity>(this.operations.get, options);
+    return this.httpClient.get<FolderEntity>(this.operations.get,
+           this.httpFolderRequestParamBuilder(folderPath));
   }
 
   deleteFolder(folderPath: string): Observable<FolderEntity> {
-    const options = folderPath ?
-          {params: new HttpParams().append("path", folderPath)} : {};
-    return this.httpClient.delete<FolderEntity>(this.operations.delete, options);
+    return this.httpClient.delete<FolderEntity>(this.operations.delete,
+           this.httpFolderRequestParamBuilder(folderPath));
+  }
+
+  private httpFolderRequestParamBuilder(folderPath: string) {
+    return folderPath ? {params: new HttpParams().append("path", folderPath)} : {};
   }
 }
