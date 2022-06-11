@@ -1,5 +1,16 @@
 <main class="container">
-  <p>Folders</p>
+  <div class="row row-cols-auto">
+    <div class="col">
+      <span>Folders</span>
+    </div>
+    <div class="col">
+      <button class="btn btn-outloine-secondary">
+        <i class="bi bi-folder-plus"></i>
+        Create folder
+      </button>
+    </div>
+  </div>
+
   <div class="container">
     <li class="d-flex align-items-center justify-content-start">
       <ul *ngFor="let dir of data.dirs">
