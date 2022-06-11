@@ -1,37 +1,4 @@
 <router-outlet></router-outlet>
-<nav class="navbar bg-light">
-  <div class="container-fluid">
-  <!-- <img src="../assets/img/PHDrive.png" style="width: 100px"/> -->
-    <a class="navbar-brand">PHDrive</a>
-    <form class="d-flex" role="search">
-      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success" type="submit">Search</button>
-    </form>
-  </div>
-</nav>
 
-<main class="container">
-  <p>Folders</p>
-  <div class="container">
-    <li class="d-flex align-items-center justify-content-start">
-      <ul *ngFor="let dir of data.dirs">
-        <button class="btn btn-dark">
-          <i class="bi bi-folder-fill"></i>
-          {{ dir }}
-        </button>
-      </ul>
-    </li>
-  </div>
-
-  <p>Files</p>
-  <div class="container">
-    <li class="d-flex align-items-center justify-content-start">
-      <ul *ngFor="let file of data.files">
-        <button class="btn btn-dark">
-          <i class="bi bi-file-earmark-fill"></i>
-          {{ file }}
-        </button>
-      </ul>
-    </li>
-  </div>
-</main>
+<app-phdrive-navbar></app-phdrive-navbar>
+<app-phdrive-content [folderPath]="rootPath"></app-phdrive-content>
