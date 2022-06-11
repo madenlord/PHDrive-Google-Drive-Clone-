@@ -22,6 +22,8 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.data = this.homeFolder;
+    this.folderService.getFolderContent(".").subscribe(folderContent =>
+      this.data = folderContent
+    );
   }
 }
