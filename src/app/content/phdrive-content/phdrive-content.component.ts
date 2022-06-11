@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FolderEntity } from 'src/app/shared/models/folderEntity';
 import { NGXLogger } from 'ngx-logger';
 import { PhdriveNavigationService } from 'src/app/shared/services/phdrive-navigation.service';
@@ -11,6 +11,7 @@ import { PhdriveNavigationService } from 'src/app/shared/services/phdrive-naviga
 })
 export class PhdriveContentComponent implements OnInit {
 
+  @Input() folderPath!: string;
   data!: FolderEntity;
 
   constructor(
@@ -19,7 +20,7 @@ export class PhdriveContentComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.folderService.getFolderContent(".").subscribe(folderContent =>
+    this.folderService.getFolderContent(this.folderPath).subscribe(folderContent =>
       this.data = folderContent
     );
   }
