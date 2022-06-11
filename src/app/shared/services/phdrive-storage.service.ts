@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
@@ -28,9 +28,12 @@ export class PhdriveStorageService {
            this.httpFileRequestParamBuilder(filePath));
   }
 
-  downloadFile(filePath: string): Observable<File> {
-    return this.httpClient.get<File>(this.operations.get,
-           this.httpFileRequestParamBuilder(filePath));
+  downloadFile(filePath: string): Observable<HttpResponse<Blob>> {
+    return this.httpClient.get(this.operations.get, {
+      observe: 'response',
+      responseType: 'blob',
+      params: new HttpParams().append("file", filePath)
+    });
   }
 
   deleteFile(filePath: string): Observable<any> {
@@ -39,7 +42,7 @@ export class PhdriveStorageService {
   }
 
 
-  private httpFileRequestParamBuilder(filePath: string) {
+  private httpFileRequestParamBuilder(filePath: string): Object {
     return filePath ? {params: new HttpParams().append("path", filePath)} : {};
   }
 }

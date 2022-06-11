@@ -2,7 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FolderEntity } from 'src/app/shared/models/folderEntity';
 import { NGXLogger } from 'ngx-logger';
 import { PhdriveNavigationService } from 'src/app/shared/services/phdrive-navigation.service';
-
+import { PhdriveStorageService } from 'src/app/shared/services/phdrive-storage.service';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-phdrive-content',
@@ -17,6 +18,7 @@ export class PhdriveContentComponent implements OnInit {
   constructor(
     private logger: NGXLogger,
     private folderService: PhdriveNavigationService,
+    private fileService: PhdriveStorageService
   ) {}
 
   ngOnInit(): void {
@@ -34,4 +36,13 @@ export class PhdriveContentComponent implements OnInit {
     this.updateData();
   }
 
+  downloadFile(fileName: string): void {
+    this.logger.log(this.folderPath + "/" + fileName);
+    this.fileService.downloadFile(this.folderPath + "/" + fileName).subscribe(response => {
+      this.logger.log(response);
+      saveAs(new File([response.body!], fileName,
+             {type: `${response.headers.get('Content-type')};charset=utf-8`}));
+    }
+    );
+  }
 }
