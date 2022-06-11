@@ -9,3 +9,29 @@
     </form>
   </div>
 </nav>
+
+<main class="container">
+  <p>Folders</p>
+  <div class="container">
+    <li class="d-flex align-items-center justify-content-start">
+      <ul *ngFor="let dir of data.dirs">
+        <button class="btn btn-outline-info">
+          <i class="bi bi-folder-fill"></i>
+          {{ dir }}
+        </button>
+      </ul>
+    </li>
+  </div>
+
+  <p>Files</p>
+  <div class="container">
+    <li class="d-flex align-items-center justify-content-start">
+      <ul *ngFor="let file of data.files">
+        <button class="btn btn-outline-info">
+          <i class="bi bi-file-earmark-fill"></i>
+          {{ file }}
+        </button>
+      </ul>
+    </li>
+  </div>
+</main>

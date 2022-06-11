@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NGXLogger } from 'ngx-logger';
 import { FolderEntity } from './shared/models/folderEntity';
+import { homeDir } from './shared/models/mocked-data';
 import { PhdriveNavigationService } from './shared/services/phdrive-navigation.service';
 import { PhdriveStorageService } from './shared/services/phdrive-storage.service';
 
@@ -11,8 +12,8 @@ import { PhdriveStorageService } from './shared/services/phdrive-storage.service
 })
 export class AppComponent implements OnInit {
 
-  private folderPath!: string;
-  private folderContent!: FolderEntity;
+  data!: FolderEntity;
+  private homeFolder: FolderEntity = homeDir; // TODO: change for real services.
 
   constructor(
     private logger: NGXLogger,
@@ -21,12 +22,6 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.folderPath = "";
-    this.folderService.getFolderContent(this.folderPath)
-                      .subscribe((folderContent: FolderEntity) =>
-    {
-      this.folderContent = folderContent;
-      this.logger.log(this.folderContent);
-    });
+    this.data = this.homeFolder;
   }
 }
