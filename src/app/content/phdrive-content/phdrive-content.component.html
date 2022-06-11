@@ -3,7 +3,7 @@
   <div class="container">
     <li class="d-flex align-items-center justify-content-start">
       <ul *ngFor="let dir of data.dirs">
-        <button class="btn btn-dark">
+        <button class="btn btn-dark" (click)="goTo(dir)">
           <i class="bi bi-folder-fill"></i>
           {{ dir }}
         </button>

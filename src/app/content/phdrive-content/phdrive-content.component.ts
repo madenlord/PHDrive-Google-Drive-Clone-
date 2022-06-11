@@ -20,9 +20,18 @@ export class PhdriveContentComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.updateData();
+  }
+
+  private updateData(): void {
     this.folderService.getFolderContent(this.folderPath).subscribe(folderContent =>
       this.data = folderContent
     );
+  }
+
+  goTo(folderName: string): void {
+    this.folderPath += "/" + folderName;
+    this.updateData();
   }
 
 }
