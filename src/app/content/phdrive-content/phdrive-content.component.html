@@ -1,5 +1,5 @@
 <main class="container">
-  <div class="row row-cols-auto">
+  <div class="row row-cols-auto align-items-center">
     <div class="col">
       <span>Folders</span>
     </div>
@@ -22,7 +22,17 @@
     </li>
   </div>
 
-  <p>Files</p>
+  <div class="row row-cols-auto align-items-center">
+    <div class="col">
+      <span>Files</span>
+    </div>
+    <div class="col">
+      <button class="btn btn-outloine-secondary">
+        <i class="bi bi-cloud-arrow-up-fill"></i>
+        Upload file
+      </button>
+    </div>
+  </div>
   <div class="container">
     <li class="d-flex align-items-center justify-content-start">
       <ul *ngFor="let file of data.files">
