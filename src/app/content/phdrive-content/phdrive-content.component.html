@@ -12,7 +12,8 @@
   </div>
 
   <div class="container">
-    <li class="d-flex align-items-center justify-content-start">
+    <li *ngIf="data.dirs.length > 0"
+      class="d-flex align-items-center justify-content-start">
       <ul *ngFor="let dir of data.dirs">
         <button class="btn btn-dark" (click)="goTo(dir)">
           <i class="bi bi-folder-fill"></i>
@@ -27,14 +28,16 @@
       <span>Files</span>
     </div>
     <div class="col">
-      <button class="btn btn-outline-secondary">
+      <input #fileInput class="file-input" type="file" (change)="uploadFile($event)">
+      <button class="btn btn-outline-secondary" (click)="fileInput.click()">
         <i class="bi bi-cloud-arrow-up-fill"></i>
         Upload file
       </button>
     </div>
   </div>
   <div class="container">
-    <li class="d-flex align-items-center justify-content-start">
+    <li *ngIf="data.files.length > 0"
+      class="d-flex align-items-center justify-content-start">
       <ul *ngFor="let file of data.files">
         <button class="btn btn-dark" (click)="downloadFile(file)">
           <i class="bi bi-file-earmark-fill"></i>

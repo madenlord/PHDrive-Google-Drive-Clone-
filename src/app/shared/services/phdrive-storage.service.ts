@@ -1,5 +1,6 @@
-import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { NGXLogger } from 'ngx-logger';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { FileEntity } from '../models/fileEntity';
@@ -17,15 +18,14 @@ export class PhdriveStorageService {
     delete: this.endpoint + "delete/"
   }
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(
+    private httpClient: HttpClient,
+    private logger: NGXLogger) { }
 
-  uploadFile(file: File, filePath: string): Observable<FileEntity> {
-    filePath = filePath ? filePath : "/";
-
-    const formData = new FormData().append("file", file);
-
-    return this.httpClient.post<FileEntity>(this.operations.post, formData,
-           this.httpFileRequestParamBuilder(filePath));
+  uploadFile(formData: FormData): Observable<HttpEvent<Object>> {
+    return this.httpClient.post(this.operations.post, formData, {
+      observe: "events"
+    });
   }
 
   downloadFile(filePath: string): Observable<HttpResponse<Blob>> {
