@@ -22,9 +22,9 @@ export class PhdriveStorageService {
     private httpClient: HttpClient,
     private logger: NGXLogger) { }
 
-  uploadFile(formData: FormData): Observable<HttpEvent<Object>> {
+  uploadFile(formData: FormData): Observable<HttpResponse<Object>> {
     return this.httpClient.post(this.operations.post, formData, {
-      observe: "events"
+      observe: "response"
     });
   }
 

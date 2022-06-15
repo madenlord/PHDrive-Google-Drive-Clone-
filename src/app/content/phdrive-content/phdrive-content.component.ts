@@ -4,7 +4,8 @@ import { NGXLogger } from 'ngx-logger';
 import { PhdriveNavigationService } from 'src/app/shared/services/phdrive-navigation.service';
 import { PhdriveStorageService } from 'src/app/shared/services/phdrive-storage.service';
 import { saveAs } from 'file-saver';
-import { Event } from '@angular/router';
+import { HttpResponse } from '@angular/common/http';
+import { FileEntity } from 'src/app/shared/models/fileEntity';
 
 @Component({
   selector: 'app-phdrive-content',
@@ -50,13 +51,16 @@ export class PhdriveContentComponent implements OnInit {
   uploadFile(event: any): void {
     const file: File = event.target.files[0];
     const formData = new FormData();
+    let fileInfo: FileEntity;
 
     formData.append("file", file, file.name);
     formData.append("path", this.folderPath + "/");
     if(file) {
-      this.fileService.uploadFile(formData).subscribe(fileInfo =>
-          this.logger.log(fileInfo)
-        );
+      this.fileService.uploadFile(formData).subscribe((httpResponse: HttpResponse<Object>) => {
+        fileInfo = httpResponse.body as FileEntity;
+        this.data.files.push(fileInfo.filename);
+      }
+      );
     }
   }
 }
