@@ -1,5 +1,6 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { NGXLogger } from 'ngx-logger';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { FileEntity } from '../models/fileEntity';
@@ -17,20 +18,22 @@ export class PhdriveStorageService {
     delete: this.endpoint + "delete/"
   }
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(
+    private httpClient: HttpClient,
+    private logger: NGXLogger) { }
 
-  uploadFile(file: File, filePath: string): Observable<FileEntity> {
-    filePath = filePath ? filePath : "/";
-
-    const formData = new FormData().append("file", file);
-
-    return this.httpClient.post<FileEntity>(this.operations.post, formData,
-           this.httpFileRequestParamBuilder(filePath));
+  uploadFile(formData: FormData): Observable<HttpResponse<Object>> {
+    return this.httpClient.post(this.operations.post, formData, {
+      observe: "response"
+    });
   }
 
-  downloadFile(filePath: string): Observable<File> {
-    return this.httpClient.get<File>(this.operations.get,
-           this.httpFileRequestParamBuilder(filePath));
+  downloadFile(filePath: string): Observable<HttpResponse<Blob>> {
+    return this.httpClient.get(this.operations.get, {
+      observe: 'response',
+      responseType: 'blob',
+      params: new HttpParams().append("file", filePath)
+    });
   }
 
   deleteFile(filePath: string): Observable<any> {
@@ -39,7 +42,7 @@ export class PhdriveStorageService {
   }
 
 
-  private httpFileRequestParamBuilder(filePath: string) {
+  private httpFileRequestParamBuilder(filePath: string): Object {
     return filePath ? {params: new HttpParams().append("path", filePath)} : {};
   }
 }

@@ -19,9 +19,8 @@ export class PhdriveNavigationService {
 
   constructor(private httpClient: HttpClient) { }
 
-  createFolder(folderPath: string): Observable<FolderEntity> {
-    return this.httpClient.post<FolderEntity>(this.operations.post,
-           this.httpFolderRequestParamBuilder(folderPath));
+  createFolder(newFolderForm: FormData): Observable<FolderEntity> {
+    return this.httpClient.post<FolderEntity>(this.operations.post, newFolderForm);
   }
 
   getFolderContent(folderPath: string): Observable<FolderEntity> {
