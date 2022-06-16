@@ -7,12 +7,16 @@ import { AppComponent } from './app.component';
 import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
 import { PhdriveNavbarComponent } from './navbar/phdrive-navbar/phdrive-navbar.component';
 import { PhdriveContentComponent } from './content/phdrive-content/phdrive-content.component';
+import { PhdriveContentFoldersComponent } from './content/phdrive-content/phdrive-content-folders/phdrive-content-folders.component';
+import { PhdriveContentFilesComponent } from './content/phdrive-content/phdrive-content-files/phdrive-content-files.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PhdriveNavbarComponent,
-    PhdriveContentComponent
+    PhdriveContentComponent,
+    PhdriveContentFoldersComponent,
+    PhdriveContentFilesComponent
   ],
   imports: [
     BrowserModule,

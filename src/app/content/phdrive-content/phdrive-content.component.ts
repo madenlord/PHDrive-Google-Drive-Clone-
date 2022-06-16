@@ -27,24 +27,9 @@ export class PhdriveContentComponent implements OnInit {
     this.updateData();
   }
 
-  private updateData(): void {
+  public updateData(): void {
     this.folderService.getFolderContent(this.folderPath).subscribe(folderContent =>
       this.data = folderContent
-    );
-  }
-
-  goTo(folderName: string): void {
-    this.folderPath += "/" + folderName;
-    this.updateData();
-  }
-
-  createFolder(folderName: string): void {
-    const folderPath = this.folderPath + "/" + folderName;
-    const newFolderForm: FormData = new FormData();
-    newFolderForm.append("path", folderPath);
-
-    this.folderService.createFolder(newFolderForm).subscribe((folderInfo: FolderEntity) =>
-      this.data.dirs.push(folderName)
     );
   }
 
