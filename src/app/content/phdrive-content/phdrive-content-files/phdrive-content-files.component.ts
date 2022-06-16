@@ -4,6 +4,7 @@ import { NGXLogger } from 'ngx-logger';
 import { saveAs } from 'file-saver';
 import { FileEntity } from 'src/app/shared/models/fileEntity';
 import { PhdriveStorageService } from 'src/app/shared/services/phdrive-storage.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-phdrive-content-files',
@@ -18,6 +19,7 @@ export class PhdriveContentFilesComponent implements OnInit {
 
   constructor(
     private logger: NGXLogger,
+    private toastr: ToastrService,
     private storageService: PhdriveStorageService
   ) { }
 
@@ -45,7 +47,9 @@ export class PhdriveContentFilesComponent implements OnInit {
       this.storageService.uploadFile(formData).subscribe((httpResponse: HttpResponse<Object>) => {
         fileInfo = httpResponse.body as FileEntity;
         this.files.push(fileInfo.filename);
-      }
+        this.toastr.success("File successfully stored", "Success");
+      }, (httpResponse: HttpResponse<Object>) =>
+          this.toastr.error("Couldn't store file: internal server error", "Failure")
       );
     }
   }
