@@ -3,28 +3,6 @@
   (folderPathChange)="this.updateData()">
   </app-phdrive-content-folders>
 
-  <!-- Files and file operations -->
-  <div class="row row-cols-auto align-items-center">
-    <div class="col">
-      <span>Files</span>
-    </div>
-    <div class="col">
-      <input #fileInput class="file-input" type="file" (change)="uploadFile($event)">
-      <button class="btn btn-outline-secondary" (click)="fileInput.click()">
-        <i class="bi bi-cloud-arrow-up-fill"></i>
-        Upload file
-      </button>
-    </div>
-  </div>
-  <div class="container">
-    <li *ngIf="data.files.length > 0"
-      class="d-flex align-items-center justify-content-start">
-      <ul *ngFor="let file of data.files">
-        <button class="btn btn-dark" (click)="downloadFile(file)">
-          <i class="bi bi-file-earmark-fill"></i>
-          {{ file }}
-        </button>
-      </ul>
-    </li>
-  </div>
+  <app-phdrive-content-files [(files)]="data.files" [folderPath]="folderPath">
+  </app-phdrive-content-files>
 </main>
