@@ -32,7 +32,8 @@ export class PhdriveContentFilesComponent implements OnInit {
       this.logger.log(response);
       saveAs(new File([response.body!], fileName,
              {type: `${response.headers.get('Content-Type')};charset=utf-8`}));
-    }
+    }, (response: HttpResponse<Blob>) =>
+      this.toastr.error(`File ${fileName} not found`, "Failure")
     );
   }
 
