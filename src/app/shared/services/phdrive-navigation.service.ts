@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
@@ -19,8 +19,11 @@ export class PhdriveNavigationService {
 
   constructor(private httpClient: HttpClient) { }
 
-  createFolder(newFolderForm: FormData): Observable<FolderEntity> {
-    return this.httpClient.post<FolderEntity>(this.operations.post, newFolderForm);
+  createFolder(newFolderForm: FormData): Observable<HttpResponse<FolderEntity>> {
+    return this.httpClient.post<FolderEntity>(this.operations.post, newFolderForm,
+      {
+        observe: 'response'
+      });
   }
 
   getFolderContent(folderPath: string): Observable<FolderEntity> {
