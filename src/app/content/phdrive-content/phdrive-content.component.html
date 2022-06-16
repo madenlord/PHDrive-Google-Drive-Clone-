@@ -24,13 +24,16 @@
         </div>
         <div class="modal-body">
           <div class="mb-3">
-            <label for="folder-name" class="col-form-label">Folder name:</label>
-            <input type="text" class="form-control" id="folder-name">
+            <label for="folderName" class="col-form-label">Folder name:</label>
+            <input type="text" #folderName class="form-control" id="folderName">
           </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-outline-primary">Create folder</button>
+          <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal"
+          (click)="createFolder(folderName.value)">
+          Create folder
+          </button>
         </div>
       </div>
     </div>
