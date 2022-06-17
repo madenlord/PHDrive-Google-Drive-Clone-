@@ -14,6 +14,10 @@ export class PhdriveContentNewFolderComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  invalidFolderName(name: string): boolean {
+    return (name.includes("/") || name.includes(".")) ? true : false;
+  }
+
   submit(folderName: string): void {
     this.onCreate.emit(folderName);
   }
