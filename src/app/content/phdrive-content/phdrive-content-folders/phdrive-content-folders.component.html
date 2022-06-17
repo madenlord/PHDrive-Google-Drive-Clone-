@@ -13,30 +13,7 @@
   </div>
 </div>
 
-<!-- Bootstrap modal for creating new folder -->
-<div class="modal fade" id="modalNewFolder" tabindex="-1" aria-labelledby="modalNewFolderLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modalNewFolderLabel">New folder</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <div class="mb-3">
-          <label for="folderName" class="col-form-label">Folder name:</label>
-          <input type="text" #folderName class="form-control" id="folderName">
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal"
-        (click)="createFolder(folderName.value)">
-        Create folder
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
+<app-phdrive-content-new-folder (onCreate)="createFolder($event)"></app-phdrive-content-new-folder>
 
 <div class="container">
   <li *ngIf="folders.length > 0"
