@@ -11,7 +11,8 @@ import { PhdriveStorageService } from 'src/app/shared/services/phdrive-storage.s
 })
 export class PhdriveContentComponent implements OnInit {
 
-  @Input() folderPath!: string;
+  @Input() rootPath!: string;
+  folderPath!: string;
   data!: FolderEntity;
 
   constructor(
@@ -21,6 +22,7 @@ export class PhdriveContentComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.folderPath = this.rootPath;
     this.updateData();
   }
 
