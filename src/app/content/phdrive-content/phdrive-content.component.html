@@ -1,6 +1,5 @@
 <main class="container">
-  <app-phdrive-content-folders [(folders)]="data.dirs" [(folderPath)]="folderPath"
-  (folderPathChange)="this.updateData()">
+  <app-phdrive-content-folders [(folders)]="data.dirs" [folderPath]="folderPath">
   </app-phdrive-content-folders>
 
   <app-phdrive-content-files [(files)]="data.files" [folderPath]="folderPath">

@@ -19,7 +19,8 @@
   <li *ngIf="folders.length > 0"
     class="d-flex align-items-center justify-content-start">
     <ul *ngFor="let folder of folders">
-      <button class="btn btn-dark" (click)="goTo(folder)">
+      <button class="btn btn-dark" [routerLink]="['/folder']"
+      [queryParams]="{path: this.folderPath + '/' + folder}">
         <i class="bi bi-folder-fill"></i>
         {{ folder }}
       </button>
