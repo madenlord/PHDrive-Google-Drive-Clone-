@@ -1,8 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FolderEntity } from 'src/app/shared/models/folderEntity';
 import { NGXLogger } from 'ngx-logger';
 import { PhdriveNavigationService } from 'src/app/shared/services/phdrive-navigation.service';
 import { PhdriveStorageService } from 'src/app/shared/services/phdrive-storage.service';
+import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-phdrive-content',
@@ -11,19 +12,24 @@ import { PhdriveStorageService } from 'src/app/shared/services/phdrive-storage.s
 })
 export class PhdriveContentComponent implements OnInit {
 
-  @Input() rootPath!: string;
+  private rootPath: string = ".";
   folderPath!: string;
   data!: FolderEntity;
 
   constructor(
     private logger: NGXLogger,
+    private route: ActivatedRoute,
     private folderService: PhdriveNavigationService,
     private fileService: PhdriveStorageService
   ) {}
 
   ngOnInit(): void {
-    this.folderPath = this.rootPath;
-    this.updateData();
+    this.route.queryParams.subscribe((queryParams: Params) => {
+      this.folderPath = typeof(queryParams['path']) !== "undefined" ?
+                        queryParams['path'] : this.rootPath;
+      this.updateData();
+    })
+
   }
 
   public updateData(): void {

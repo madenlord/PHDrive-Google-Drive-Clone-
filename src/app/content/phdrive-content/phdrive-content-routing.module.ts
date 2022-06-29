@@ -5,14 +5,18 @@ import { PhdriveContentComponent } from './phdrive-content.component';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'folders',
+    redirectTo: 'folder',
     pathMatch: 'full'
   },
   {
-    path: 'folders',
+    path: 'folder',
     children: [
       {
-        path: '*',
+        path: '',
+        component: PhdriveContentComponent
+      },
+      {
+        path: ':path',
         component: PhdriveContentComponent
       }
     ]
