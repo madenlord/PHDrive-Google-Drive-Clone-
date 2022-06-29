@@ -15,6 +15,7 @@ export class PhdriveContentFoldersComponent implements OnInit {
   @Input() folders!: string[];
   @Output() foldersChange: EventEmitter<string[]> = new EventEmitter<string[]>();
   @Input() folderPath!: string;
+  @Output() onFolderClick: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(
     private logger: NGXLogger,
@@ -23,6 +24,10 @@ export class PhdriveContentFoldersComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+  }
+
+  goTo(folderName: string): void {
+    this.onFolderClick.emit(this.folderPath + "/" + folderName);
   }
 
   createFolder(folderName: string): void {
